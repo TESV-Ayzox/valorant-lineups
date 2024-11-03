@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valorant Line-ups</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1 id="agent-title">Agent</h1>
+        <p>Line-ups pour <span id="map-name"></span></p>
+    </header>
+    <main>
+        <section id="links">
+            <!-- Ajouter ici les liens vers les reels -->
+            <a href="https://www.instagram.com/p/example1/" target="_blank">Line-up 1</a>
+            <a href="https://www.instagram.com/p/example2/" target="_blank">Line-up 2</a>
+            <!-- etc. -->
+        </section>
+    </main>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const mapName = params.get("map");
+        const agentName = params.get("agent");
+        document.getElementById("map-name").innerText = mapName ? mapName.toUpperCase() : "Map";
+        document.getElementById("agent-title").innerText = agentName ? agentName.toUpperCase() : "Agent";
+    </script>
+</body>
+</html>

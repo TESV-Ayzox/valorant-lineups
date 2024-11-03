@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Ajouter des Line-ups</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module">
+        import { db, ref, push, set } from './firebase-config.js';
+
+        function addLineup() {
+            const map = document.getElementById('map').value;
+            const agent = document.getElementById('agent').value;
+            const link = document.getElementById('link').value;
+
+            if (map && agent && link) {
+                const lineupRef = ref(db, `lineups/${map}/${agent}`);
+                const newLineupRef = push(lineupRef);
+
+                set(newLineupRef, {
+                    link: link,
+                    timestamp: Date.now()
+                }).then(() => {
+                    alert("Line-up ajouté !");
+                    document.getElementById('link').value = '';
+                }).catch(error => {
+                    console.error("Erreur : ", error);
+                });
+            } else {
+                alert("Veuillez remplir tous les champs.");
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Interface Admin - Ajouter des Line-ups</h1>
+    </header>
+    <main>
+        <section>
+            <label for="map">Map :</label>
+            <input type="text" id="map" placeholder="ex : Ascent">
+            <label for="agent">Agent :</label>
+            <input type="text" id="agent" placeholder="ex : Sova">
+            <label for="link">Lien Instagram :</label>
+            <input type="url" id="link" placeholder="ex : https://instagram.com/p/...">
+            <button onclick="addLineup()">Ajouter le Line-up</button>
+        </section>
+    </main>
+</body>
+</html>
