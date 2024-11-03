@@ -25,6 +25,7 @@
         const params = new URLSearchParams(window.location.search);
         const mapName = params.get("map");
         document.getElementById("map-title").innerText = mapName ? mapName.toUpperCase() : "Map";
+	document.getElementById("agent-title").innerText = agentName ? agentName.toUpperCase() : "Agent";
     </script>
 </body>
 </html>
